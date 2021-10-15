@@ -21,5 +21,11 @@ services:
             - '../src/Kernel.php'
             - '../src/Tests/'
 
+    App\Infrastructure\Persistence\Repository\Users:
+        class: App\Infrastructure\Persistence\Repository\Users
+        factory: ['@Doctrine\ODM\MongoDB\DocumentManager', getRepository]
+        arguments:
+            - App\Domain\User
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

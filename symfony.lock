@@ -1,4 +1,7 @@
 {
+    "alcaeus/mongo-php-adapter": {
+        "version": "1.2.1"
+    },
     "behat/behat": {
         "version": "v3.8.1"
     },
@@ -16,6 +19,56 @@
     },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.4"
+    },
+    "doctrine/annotations": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "a2759dd6123694c8d901d0ec80006e044c2e6457"
+        },
+        "files": [
+            "config/routes/annotations.yaml"
+        ]
+    },
+    "doctrine/cache": {
+        "version": "1.12.1"
+    },
+    "doctrine/collections": {
+        "version": "1.6.8"
+    },
+    "doctrine/deprecations": {
+        "version": "v0.5.3"
+    },
+    "doctrine/event-manager": {
+        "version": "1.1.1"
+    },
+    "doctrine/instantiator": {
+        "version": "1.4.0"
+    },
+    "doctrine/lexer": {
+        "version": "1.2.1"
+    },
+    "doctrine/mongodb-odm": {
+        "version": "2.2.2"
+    },
+    "doctrine/mongodb-odm-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "1fd8598bf42227a1c8905edd32f640e4c5d15eff"
+        },
+        "files": [
+            "config/packages/doctrine_mongodb.yaml",
+            "config/packages/prod/doctrine_mongodb.yaml",
+            "src/Document/.gitignore"
+        ]
+    },
+    "doctrine/persistence": {
+        "version": "2.2.2"
     },
     "friends-of-behat/mink-browserkit-driver": {
         "version": "v1.5.0"
@@ -41,11 +94,17 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "jean85/pretty-package-versions": {
+        "version": "1.6.0"
+    },
     "justinrainbow/json-schema": {
         "version": "5.2.11"
     },
     "laminas/laminas-code": {
         "version": "4.4.3"
+    },
+    "mongodb/mongodb": {
+        "version": "1.9.0"
     },
     "psr/cache": {
         "version": "2.0.0"
@@ -91,6 +150,9 @@
     },
     "symfony/deprecation-contracts": {
         "version": "v2.4.0"
+    },
+    "symfony/doctrine-bridge": {
+        "version": "v5.3.8"
     },
     "symfony/dom-crawler": {
         "version": "v5.3.7"
@@ -152,6 +214,9 @@
     },
     "symfony/http-kernel": {
         "version": "v5.3.9"
+    },
+    "symfony/options-resolver": {
+        "version": "v5.3.7"
     },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.23.1"

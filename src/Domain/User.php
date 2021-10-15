@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain;
 
-final class User
+class User
 {
     private Id $id;
     private Email $email;
