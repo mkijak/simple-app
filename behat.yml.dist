@@ -2,7 +2,23 @@ default:
     suites:
         default:
             contexts:
-                - App\Tests\Behat\DemoContext
+                - behatch:context:browser
+                - behatch:context:debug
+                - behatch:context:system
+                - behatch:context:json
+                - behatch:context:table
+                - behatch:context:rest
+                - behatch:context:xml
+                - Behat\MinkExtension\Context\MinkContext
+                - App\Tests\Behat\Context\UserContext
 
     extensions:
-        FriendsOfBehat\SymfonyExtension: null
+        FriendsOfBehat\SymfonyExtension:
+            bootstrap: "tests/bootstrap.php"
+            kernel:
+                class: App\Kernel
+        Behatch\Extension: ~
+        Behat\MinkExtension:
+            sessions:
+                default:
+                    symfony: ~
