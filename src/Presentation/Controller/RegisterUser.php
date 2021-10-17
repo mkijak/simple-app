@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Presentation\Controller;
 
+use App\Application\CommandBus;
+use App\Application\Exception\InvalidInput;
 use App\Presentation\Exception\InvalidDto;
 use App\Presentation\Service\GeneratesJsonResponse;
 use App\Presentation\Service\ProvidesApiModels;
@@ -19,6 +21,7 @@ class RegisterUser
     public function __construct(
         private ProvidesApiModels $modelProvider,
         private GeneratesJsonResponse $jsonResponse,
+        private CommandBus $commandBus,
     ) {
     }
     /**
@@ -52,8 +55,17 @@ class RegisterUser
     public function __invoke(Request $request)
     {
         try {
+            /** @var DTO\RegisterUser $dto */
             $dto = $this->modelProvider->load($request->getContent(), DTO\RegisterUser::class);
         } catch (InvalidDto $exception) {
+            return $this->jsonResponse->badRequest($exception->getMessage());
+        } catch (\Throwable $exception) {
+            return $this->jsonResponse->serverError(sprintf('[%s] %s', get_class($exception), $exception->getMessage()));
+        }
+
+        try {
+            $this->commandBus->dispatch(new \App\Application\Command\RegisterUser($dto->email(), $dto->password()));
+        } catch (InvalidInput $exception) {
             return $this->jsonResponse->badRequest($exception->getMessage());
         } catch (\Throwable $exception) {
             return $this->jsonResponse->serverError(sprintf('[%s] %s', get_class($exception), $exception->getMessage()));

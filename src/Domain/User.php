@@ -6,7 +6,7 @@ namespace App\Domain;
 
 class User
 {
-    private Id $id;
+    private string $id;
     private Email $email;
     private HashedPassword $password;
 
@@ -16,7 +16,7 @@ class User
     ): User {
         $user = new self();
 
-        $user->id = new Id();
+        $user->id = (string) new Id();
         $user->email = new Email($email);
         $user->password = new HashedPassword($password);
 
