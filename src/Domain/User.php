@@ -18,8 +18,23 @@ class User
 
         $user->id = (string) new Id();
         $user->email = new Email($email);
-        $user->password = new HashedPassword($password);
+        $user->password = HashedPassword::fromPlainPassword($password);
 
         return $user;
+    }
+
+    public function id(): string
+    {
+        return $this->id;
+    }
+
+    public function email(): Email
+    {
+        return $this->email;
+    }
+
+    public function password(): HashedPassword
+    {
+        return $this->password;
     }
 }

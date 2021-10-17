@@ -1,9 +1,59 @@
 nelmio_api_doc:
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/api(?!/doc(|.json)$) # Accepts routes under /api except /api/doc
     documentation:
         info:
             title: My App
             description: This is a simple app
             version: 1.0.0
-    areas: # to filter documented areas
-        path_patterns:
-            - ^/api(?!/doc(|.json)$) # Accepts routes under /api except /api/doc
+        components:
+            securitySchemes:
+                Bearer:
+                    name: Authorization
+                    in: header
+                    type: apiKey
+                    description: 'Value: Bearer {token}'
+        paths:
+            /api/login:
+                post:
+                    tags:
+                        - Login
+                    description: Login into the api.
+                    requestBody:
+                        description: User to login
+                        required: true
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        username:
+                                            type: string
+                                        password:
+                                            type: string
+                    responses:
+                        '200':
+                            description: Login successful
+                            content:
+                                application/json:
+                                    schema:
+                                        type: object
+                                        properties:
+                                            token:
+                                                type: string
+                                            refresh_token:
+                                                type: string
+                        '401':
+                            description: Bad credentials
+                            content:
+                                application/json:
+                                    schema:
+                                        type: object
+                                        properties:
+                                            code:
+                                                type: int
+                                                example: 401
+                                            message:
+                                                type: string
+                                                example: "Bad credentials"

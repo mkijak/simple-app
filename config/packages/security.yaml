@@ -1,0 +1,33 @@
+security:
+    enable_authenticator_manager: true
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        users:
+            id: App\Infrastructure\Security\UserProvider
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        apidoc:
+            pattern: ^api/doc$
+            security: false
+        login:
+            pattern: ^/api/login$
+            stateless: true
+            provider: users
+            json_login:
+                check_path: /api/login
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        api:
+            provider: users
+            pattern: ^/api(!/register)
+            stateless: true
+            jwt: ~
+    access_control:
+         - { path: ^/api(?!/doc(|.json)$), roles: ROLE_USER }
+         - { path: ^/api/register, roles: PUBLIC_ACCESS }
+
+    encoders:
+        App\Infrastructure\Security\PasswordHasher:
+            id: App\Infrastructure\Security\PasswordHasher

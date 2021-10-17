@@ -8,19 +8,29 @@ final class HashedPassword implements \Stringable
 {
     private string $hash;
 
-    public function __construct(
-        string $password,
-    ) {
-        if(!$password) {
+    public static function fromPlainPassword(string $plainPassword): HashedPassword
+    {
+        if(!$plainPassword) {
             throw new \DomainException('Password cannot be empty');
         }
 
-        $this->hash = $this->hash($password);
+        $pass = new self();
+        $pass->hash = self::hash($plainPassword);
+
+        return $pass;
+    }
+
+    public static function fromHash(string $hash): HashedPassword
+    {
+        $pass = new self();
+        $pass->hash = $hash;
+
+        return $pass;
     }
 
     public function equals(string $plainPassword): bool
     {
-        return $this->hash === $this->hash($plainPassword);
+        return password_verify($plainPassword, $this->hash);
     }
 
     public function __toString(): string
@@ -28,7 +38,7 @@ final class HashedPassword implements \Stringable
         return $this->hash;
     }
 
-    private function hash(string $plainPassword): string
+    private static function hash(string $plainPassword): string
     {
         return password_hash($plainPassword, PASSWORD_ARGON2I);
     }
