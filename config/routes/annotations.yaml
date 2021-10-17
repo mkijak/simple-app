@@ -1,0 +1,3 @@
+market:
+    resource: "../../src/Presentation/Controller/"
+    type: annotation
