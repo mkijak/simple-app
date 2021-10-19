@@ -37,4 +37,9 @@ class User
     {
         return $this->password;
     }
+
+    public function updatePassword(string $plainPassword)
+    {
+        $this->password = HashedPassword::fromPlainPassword($plainPassword);
+    }
 }

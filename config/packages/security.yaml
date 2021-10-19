@@ -21,12 +21,13 @@ security:
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
         api:
             provider: users
-            pattern: ^/api(!/register)
+            pattern: ^/api(/!register)
             stateless: true
             jwt: ~
     access_control:
          - { path: ^/api(?!/doc(|.json)$), roles: ROLE_USER }
          - { path: ^/api/register, roles: PUBLIC_ACCESS }
+         - { path: ^/api/login, roles: PUBLIC_ACCESS }
 
     encoders:
         App\Infrastructure\Security\PasswordHasher:

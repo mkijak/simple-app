@@ -3,7 +3,7 @@ Feature:
 
   Scenario: Registers new user with e-mail and password
     Given User with email "user@mail.com" does not exist
-    When I send a "POST" request to "/register" with body:
+    When I send a "POST" request to "/api/register" with body:
         """
         {
           "email": "user@mail.com",
@@ -15,7 +15,7 @@ Feature:
 
   Scenario: Does not register user when e-mail is already used
     Given User with email "user@mail.com" exists
-    When I send a "POST" request to "/register" with body:
+    When I send a "POST" request to "/api/register" with body:
         """
         {
           "email": "user@mail.com",
@@ -24,12 +24,12 @@ Feature:
         """
     Then the response status code should be 400
     And the response should be in JSON
-    And the JSON node "error_message" should be equal to "This e-mail address is already in use"
+    And the JSON node "error" should be equal to "E-mail address user@mail.com is already in use"
 
 
   Scenario: Does not register user with empty password
     Given User with email "user@mail.com" does not exist
-    When I send a "POST" request to "/register" with body:
+    When I send a "POST" request to "/api/register" with body:
         """
         {
           "email": "user@mail.com",
@@ -38,4 +38,4 @@ Feature:
         """
     Then the response status code should be 400
     And the response should be in JSON
-    And the JSON node "error_message" should be equal to "Cannot register without a password"
+    And the JSON node "error" should be equal to "Password cannot be empty"
