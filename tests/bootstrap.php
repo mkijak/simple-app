@@ -8,6 +8,6 @@ require dirname(__DIR__).'/vendor/autoload.php';
 
 (new Dotenv())->loadEnv(dirname(__DIR__).'/.env');
 
-if (is_readable(dirname(__DIR__).'/.env.test.local')) {
-    (new Dotenv())->overload(dirname(__DIR__).'/.env.test.local');
+if (is_readable(dirname(__DIR__).'/.env.test')) {
+    (new Dotenv())->overload(dirname(__DIR__).'/.env.test');
 }
